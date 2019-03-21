@@ -12,7 +12,7 @@ pub const ARENA_WIDTH: f32 = 1024.0;
 
 pub struct Stry;
 
-use crate::screen::Screen;
+use crate::drawing::screen::Screen;
 
 impl SimpleState for Stry {
     fn on_start(&mut self, data: StateData<'_, GameData<'_, '_>>) {
@@ -27,13 +27,12 @@ impl SimpleState for Stry {
 
 fn initialize_screen(world: &mut World) {
     // set up resources
-    let screen = Screen::new(128, 128);
-    world.add_resource(screen);
+    world.add_resource(Screen::default());
 }
 
 fn initialise_camera(world: &mut World) {
     let mut transform = Transform::default();
-    transform.set_z(1.0);
+    transform.set_translation_z(1.0);
     world
         .create_entity()
         .with(Camera::from(Projection::orthographic(
