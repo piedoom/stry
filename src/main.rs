@@ -17,7 +17,7 @@ fn main() -> amethyst::Result<()> {
     amethyst::start_logger(Default::default());
 
     let app_root = application_root_dir()?;
-    let resources_path = app_root.join("assets");
+    let assets_path = app_root.join("assets");
     let display_config_path = app_root.join("resources/display_config.ron");
 
     // Load our display file from our project root and apply
@@ -33,7 +33,7 @@ fn main() -> amethyst::Result<()> {
     let game_data = GameDataBuilder::default()
         .with_bundle(RenderBundle::new(pipe, Some(display_config)))?
         .with_bundle(TransformBundle::new())?;
-    let mut game = Application::new("./", Stry, game_data)?;
+    let mut game = Application::new(assets_path, Stry, game_data)?;
     game.run();
 
     Ok(())
